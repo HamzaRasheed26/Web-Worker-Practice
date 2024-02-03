@@ -23,7 +23,14 @@ h1 {
   font-size: 1.5em;
   color: #333;
   text-align: center;
-  margin: 40px 0;
+  margin: 20px 0;
+}
+
+.container p {
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  margin: 20px 0;
 }
 
 .container button {

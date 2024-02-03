@@ -1,34 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web Worker Practice</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <h1>Web Worker Practice</h1>
+
     <div class="container">
       <h2>Calculate the Sum of Numbers</h2>
+
+      <p>
+        Click the buttons below to calculate the sum of numbers (1000000000)
+        using a web worker and without using a web worker. You can also change
+        the background color of the page.
+        <br />
+        You can see the difference in performance when using a web worker.
+      </p>
+
       <button onclick="calculateWithoutWorker()">
         Calculate Without <br />Web Worker
       </button>
+
       <button onclick="calculateWithWorker()">
         Calculate With <br />
         Web Worker
       </button>
+
       <button onclick="changeBackground()">Change Background</button>
     </div>
 
     <script>
+      // Create a web worker
+      const worker = new Worker("worker.js");
+
       function calculateWithoutWorker() {
-        // Add your code here to calculate without using a web worker
+        // Calculate sum without using a web worker
+        var sum = 0;
+        for (let i = 0; i < 1000000000; i++) {
+          sum += i;
+        }
+
+        alert("The sum is " + sum);
       }
 
       function calculateWithWorker() {
-        // Add your code here to calculate using a web worker
+        // Calculate sum using a web worker
+        worker.postMessage(1000000000);
       }
 
+      worker.onmessage = function (e) {
+        // Receive the result from the web worker
+        alert("The sum is " + e.data);
+      };
+
       function changeBackground() {
-        // Add your code here to change the background color
+        // change the background color
+        if (document.body.style.background !== "red") {
+          document.body.style.background = "red";
+        } else {
+          document.body.style.background = "lightblue";
+        }
       }
     </script>
   </body>
